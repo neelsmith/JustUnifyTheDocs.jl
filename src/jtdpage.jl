@@ -18,7 +18,6 @@ $(SIGNATURES)
 function childpages(pg, pglist)
     filter(p -> p.parent == pg.title, pglist)
 end
-#childpages, grandchildpages
 
 """Select pages tagged grandchild.
 
