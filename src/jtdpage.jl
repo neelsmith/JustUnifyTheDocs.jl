@@ -14,5 +14,6 @@ end
 """Select children of a give page in a pagelist.
 """
 function childpages(pg, pglist)
+    filter(pg -> pg.parent == pg.title, pglist)
 end
 #childpages, grandchildpages
