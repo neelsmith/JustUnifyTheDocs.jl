@@ -12,8 +12,18 @@ end
 
 
 """Select children of a give page in a pagelist.
+
+$(SIGNATURES)
 """
 function childpages(pg, pglist)
-    filter(pg -> pg.parent == pg.title, pglist)
+    filter(p -> p.parent == pg.title, pglist)
 end
 #childpages, grandchildpages
+
+"""Select pages tagged grandchild.
+
+$(SIGNATURES)
+"""
+function grandchildpages(parentpg, pglist)
+    filter(p -> p.grand_parent == parentpg.title, pglist)
+end
