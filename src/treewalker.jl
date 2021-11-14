@@ -1,10 +1,4 @@
 
-# readdir
-# walkdir
-# basename
-# dirname
-
-
 """Read a markdown file including YAML header for use
 with justthedocs jekyll theme.
 
