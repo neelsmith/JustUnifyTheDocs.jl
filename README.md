@@ -7,3 +7,20 @@ The module determines the sequence of files by looking at these properties in th
 - `parent`
 - `grand_parent`
 - `nav_order`
+
+
+## Briefest possible summary
+
+Add the package:
+
+```
+pkg> add https://github.com/neelsmith/JustUnifyTheDocs.jl
+```
+
+
+Build a composite markdown file with all content from your web site:
+
+```julia
+using JustUnifyTheDocs
+markdown = composite(DIRECTORY_ROOT)
+```
