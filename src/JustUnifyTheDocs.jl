@@ -1,7 +1,11 @@
 module JustUnifyTheDocs
 
 include("treewalker.jl")
+include("jtdpage.jl")
 
-export walker
-export readyaml
+export JTDPage
+export readpages
+export jtdpage
+
+
 end # module
