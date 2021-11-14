@@ -5,4 +5,6 @@ using Test
    testsite = joinpath(pwd(), "data", "docs1") 
    pgs = readpages(testsite)
    @test isa(pgs, Vector{JTDPage})
+
+   
 end
