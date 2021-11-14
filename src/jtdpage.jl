@@ -30,9 +30,9 @@ end
 
 $(SIGNATURES)
 """
-function grandchildpages(parentpg, pglist)
-    filter(p -> p.grand_parent == parentpg.title, pglist)
-end
+#function grandchildpages(parentpg, pglist)
+#    filter(p -> p.parent == parentpg.title, pglist)
+#end
 
 
 
@@ -40,7 +40,9 @@ function rootpage(pg, pagelist)
     contentarray = [pg.markdown]
     for kid in childpages(pg, pagelist)
         push!(contentarray, kid.markdown)
-        for gkid in grandchildpages(kid, pagelist)
+        @info("Check for grandchild of ", kid.title)
+        for gkid in childpages(kid, pagelist)
+            @info("Grandchild: ", gkid.title)
             push!(contentarray, gkid.markdown)
         end
     end
