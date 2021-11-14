@@ -4,6 +4,12 @@
 # basename
 # dirname
 
+
+"""Read a markdown file including YAML header for use
+with justthedocs jekyll theme.
+
+$(SIGNATURES)
+"""
 function jtdpage(f)
     lines = readlines(f)
     yaml = []
@@ -22,9 +28,9 @@ function jtdpage(f)
         propertydict[parts[1]] = join(parts[2:end], ": ")
     end
 
-      parentval = haskey(propertydict, "parent") ? propertydict["parent"] : nothing
+    parentval = haskey(propertydict, "parent") ? propertydict["parent"] : nothing
     gpval = haskey(propertydict, "grand_parent") ? propertydict["grand_parent"] : nothing
-    navorder = haskey(propertydict, "nav_order") ? parse(Int64, propertydict["nav_order"]) : nothing
+    navorder = haskey(propertydict, "nav_order") ? parse(Int64, propertydict["nav_order"]) : 0
     md = join(lines[index:end] , "\n\n")
     JTDPage(parentval, gpval, navorder, md)    
 end
