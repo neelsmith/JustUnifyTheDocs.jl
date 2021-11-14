@@ -22,4 +22,5 @@ makedocs(
 
 deploydocs(
     repo = "github.com/neelsmith/JustUnifyTheDocs.jl.git",
+    push_preview = true
 )
