@@ -1,0 +1,1 @@
+Organize sections of a long book more conveniently in subdirectories.
