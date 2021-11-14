@@ -67,5 +67,6 @@ function readpages(starthere)
             end
         end
     end
+    @info("Pages read: ", length(jtdpages))
     jtdpages
 end
