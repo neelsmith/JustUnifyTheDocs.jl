@@ -29,6 +29,12 @@ function jtdpage(f)
     JTDPage(parentval, gpval, navorder, md)    
 end
 
+
+"""Recursively read directories of markdown files
+into a list of `JTDPage`s.
+
+$(SIGNATURES)
+"""
 function readpages(starthere)
     jtdpages = JTDPage[]
     for (root, dir, files) in walkdir(starthere)
@@ -38,8 +44,7 @@ function readpages(starthere)
                 # skip
             else
                 fullpath = joinpath(root, mdfile)
-
-                @info("--> ", fullpath, isfile(fullpath))
+                #@info("--> ", fullpath, isfile(fullpath))
                 push!(jtdpages, (jtdpage(fullpath)))
             end
         end
