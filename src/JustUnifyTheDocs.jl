@@ -7,7 +7,8 @@ include("treewalker.jl")
 include("jtdpage.jl")
 
 export JTDPage
-export jtdpage, readpages
+export jtdpage
+export readpages, rootpages
 
 
 

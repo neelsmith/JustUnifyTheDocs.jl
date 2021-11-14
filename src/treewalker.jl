@@ -10,9 +10,7 @@ function jtdpage(f)
     index = 2
     l = ""
     while l != "---"
-        if ! isempty(l)
-            push!(yaml, l)
-        end
+        push!(yaml, l)
         l = lines[index]
         index = index + 1
     end
@@ -25,7 +23,7 @@ function jtdpage(f)
     parentval = haskey(propertydict, "parent") ? propertydict["parent"] : nothing
     gpval = haskey(propertydict, "grand_parent") ? propertydict["grand_parent"] : nothing
     navorder = haskey(propertydict, "nav_order") ? parse(Int64, propertydict["nav_order"]) : 0
-    md = join(lines[index:end] , "\n\n")
+    md = join(lines[index:end], "\n")
     JTDPage(parentval, gpval, navorder, md)    
 end
 
