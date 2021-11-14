@@ -14,7 +14,7 @@ using Documenter
 using JustUnifyTheDocs
 
 makedocs(
-    sitename="CitableParserBuilder.jl",
+    sitename="JustUnifyTheDocs.jl",
     pages = [
         "Guide" => "index.md",
     ]
