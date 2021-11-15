@@ -1,5 +1,8 @@
-"""A `JDTPage` has markdown content, and up to four
-settings from its YAML header.
+"""A `JDTPage` has markdown content, and four optional
+settings from its YAML header.  If the page lacks
+properties for `parent` or `grand_parent`, their value
+will be `nothing`; if no `nav_order` is set, its value
+is 0.
 """
 struct JTDPage
     title
@@ -10,45 +13,49 @@ struct JTDPage
 end
 
 
-"""Select from a list pages all pages that
+"""Select from a list of pages all pages that
 are in the root level of the site.
 """
 function rootpages(pglist)
-    filter(pg -> isnothing(pg.parent), pglist)
+    pages = filter(pg -> isnothing(pg.parent), pglist)
+    sort(pages, by = pg -> pg.num)
 end
 
 
-"""Select children of a give page in a pagelist.
+"""Select children of a given page from a list of pages.
 
 $(SIGNATURES)
 """
 function childpages(pg, pglist)
-    filter(p -> p.parent == pg.title, pglist)
+    pages = filter(p -> p.parent == pg.title, pglist)
+    sort(pages, by = p -> p.num)
 end
 
-"""Select pages tagged grandchild.
+"""For a single page at the root level of the Jekyll
+site's content hierarchy, compose a markdown
+string with the content of the root page together with
+the content of all of its children and grandchildren
+pages.
 
 $(SIGNATURES)
 """
-#function grandchildpages(parentpg, pglist)
-#    filter(p -> p.parent == parentpg.title, pglist)
-#end
-
-
-
 function rootpage(pg, pagelist)
     contentarray = [pg.markdown]
     for kid in childpages(pg, pagelist)
         push!(contentarray, kid.markdown)
-        @info("Check for grandchild of ", kid.title)
         for gkid in childpages(kid, pagelist)
-            @info("Grandchild: ", gkid.title)
             push!(contentarray, gkid.markdown)
         end
     end
     join(contentarray, "\n\n")
 end
 
+
+"""Compose a single markdown string with all content
+of a Jekyll web site configured for the `just-the-docs`` theme.
+
+$(SIGNATURES)
+""" 
 function composite(rootdir)
     allpages = readpages(rootdir)
     rootpgs = rootpages(allpages)

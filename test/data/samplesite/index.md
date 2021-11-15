@@ -7,6 +7,6 @@ has_children: true
 
 # Home page
 
-First page of site.
+This is the first page of the sample jekyll site.
 
-I guess we're including a ToC by default in our jekyll config.
+It's the only file at the root level of the hierarchy, but also has a `nav_order` setting of `0`, so it will sort ahead of any other pages you add to the root level of the site with `nav_order` greater than 0.

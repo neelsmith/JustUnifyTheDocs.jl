@@ -17,10 +17,10 @@ makedocs(
     sitename="JustUnifyTheDocs.jl",
     pages = [
         "Guide" => "index.md",
+        "API documentation" => "api.md"
     ]
     )
 
 deploydocs(
-    repo = "github.com/neelsmith/JustUnifyTheDocs.jl.git",
-    push_preview = true
+    repo = "github.com/neelsmith/JustUnifyTheDocs.jl.git"
 )
