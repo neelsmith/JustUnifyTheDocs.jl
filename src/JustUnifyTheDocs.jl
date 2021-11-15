@@ -8,7 +8,7 @@ include("jtdpage.jl")
 
 export JTDPage
 export jtdpage
-export readpages, rootpages, childpages, grandchildpages
+export readpages, rootpages, childpages
 export composite
 
 end # module

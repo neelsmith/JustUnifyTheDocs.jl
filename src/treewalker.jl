@@ -1,6 +1,5 @@
 
-"""Read a markdown file including YAML header for use
-with justthedocs jekyll theme.
+"""Create a `JTDPage` from a markdown file including YAML header for use with the `just-the-docs` jekyll theme.
 
 $(SIGNATURES)
 """
@@ -9,7 +8,7 @@ function jtdpage(f)
     yaml = []
     index = 2
     l = ""
-    while l != "---"
+    while l != "---" && index < length(lines)
         push!(yaml, l)
         l = lines[index]
         index = index + 1
@@ -19,7 +18,7 @@ function jtdpage(f)
         parts = split(conf, ":")
         propertydict[parts[1]] = tidyvalue(join(parts[2:end], ": "))
     end
-    title = propertydict["title"]
+    title = haskey(propertydict, "title") ? propertydict["title"] : "Untitled page"
     parentval = haskey(propertydict, "parent") ? propertydict["parent"] : nothing
     gpval = haskey(propertydict, "grand_parent") ? propertydict["grand_parent"] : nothing
     navorder = haskey(propertydict, "nav_order") ? parse(Int64, propertydict["nav_order"]) : 0
@@ -28,9 +27,9 @@ function jtdpage(f)
     JTDPage(title, parentval, gpval, navorder, md)    
 end
 
-"""Remove leading and trailing quotation mark.
+"""Remove any leading and trailing quotation marks.
 
-($SIGNATURES)
+$(SIGNATURES)
 """
 function stripquotes(s)
     subbed = s
@@ -43,7 +42,11 @@ function stripquotes(s)
     subbed
 end
 
+"""Tidy up strings from YAML settings by stripping
+leading/trailing whitespace, and removing any outer quotes.
 
+$(SIGNATURES)
+"""
 function tidyvalue(propvalue)
     strip(propvalue) |> stripquotes
 end
@@ -62,7 +65,6 @@ function readpages(starthere)
                 # skip
             else
                 fullpath = joinpath(root, mdfile)
-                #@info("--> ", fullpath, isfile(fullpath))
                 push!(jtdpages, (jtdpage(fullpath)))
             end
         end
