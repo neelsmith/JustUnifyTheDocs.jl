@@ -11,10 +11,10 @@ Pkg.activate(".")
 Pkg.instantiate()
 
 using Documenter
-using JustUnifyTheDocs
+using UnifyJustTheDocs
 
 makedocs(
-    sitename="JustUnifyTheDocs.jl",
+    sitename="UnifyJustTheDocs.jl",
     pages = [
         "Guide" => "index.md",
         "API documentation" => "api.md"
@@ -22,5 +22,5 @@ makedocs(
     )
 
 deploydocs(
-    repo = "github.com/neelsmith/JustUnifyTheDocs.jl.git"
+    repo = "github.com/neelsmith/UnifyJustTheDocs.jl.git"
 )

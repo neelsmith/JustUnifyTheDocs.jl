@@ -31,7 +31,7 @@ childpages
 Internal functions:
 
 ```@docs
-JustUnifyTheDocs.rootpage
-JustUnifyTheDocs.stripquotes
-JustUnifyTheDocs.tidyvalue
+UnifyJustTheDocs.rootpage
+UnifyJustTheDocs.stripquotes
+UnifyJustTheDocs.tidyvalue
 ```

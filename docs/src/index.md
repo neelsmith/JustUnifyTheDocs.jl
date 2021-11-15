@@ -1,4 +1,4 @@
-# JustUnifyTheDocs
+# UnifyJustTheDocs
 
 > Create a single Markdown file from a Jekyll web site using the `just-the-docs` theme.
 
@@ -14,7 +14,7 @@ of the sample Jekyll site in this repository's `test/data/samplesite` directory:
 
 ```@example guide
 samplesite = joinpath(repositoryroot, "test", "data", "samplesite")
-using JustUnifyTheDocs
+using UnifyJustTheDocs
 markdown = composite(samplesite)
 typeof(markdown)
 ```
@@ -28,7 +28,7 @@ print(markdown[1:100])
 
 ## What it does
 
-Patrick Marsceill's [`just-the-docs` Jekyll theme](https://pmarsceill.github.io/just-the-docs/) creates clean, easily navigated web sites with minimal configuration.  Files can be arbitrarily named and kept in directories to any depth of nested subdirectories.  The structure of the web site is determined by a combination of YAML settings organizing pages' navigation order in up to three hierarchical levels.`JustUnifyTheDocs` recursively reads all `.md` files in a file system, and uses `just-the-docs`'s conventions to sequence pages from the files' YAML settings.  The `composite` function (illustrated above) concatenates the markdown content of all the files into a single string which you could then use to do things like typeset a PDF with [pandoc](https://pandoc.org).
+Patrick Marsceill's [`just-the-docs` Jekyll theme](https://pmarsceill.github.io/just-the-docs/) creates clean, easily navigated web sites with minimal configuration.  Files can be arbitrarily named and kept in directories to any depth of nested subdirectories.  The structure of the web site is determined by a combination of YAML settings organizing pages' navigation order in up to three hierarchical levels.`UnifyJustTheDocs` recursively reads all `.md` files in a file system, and uses `just-the-docs`'s conventions to sequence pages from the files' YAML settings.  The `composite` function (illustrated above) concatenates the markdown content of all the files into a single string which you could then use to do things like typeset a PDF with [pandoc](https://pandoc.org).
 
 ### `just-the-doc`'s YAML settings
 
@@ -39,7 +39,7 @@ At each hierarchical level, pages are ordered first according to the `nav_order`
 
 ## How it works
 
-The `readpages` functions recursively looks at content of a given directory and creates a Vector of `JTDPage`s.  The current version of `JustUnifyTheDocs` makes the following assumptions:
+The `readpages` functions recursively looks at content of a given directory and creates a Vector of `JTDPage`s.  The current version of `UnifyJustTheDocs` makes the following assumptions:
 
 - invisible directories (names starting with `.`) are skipped
 - directories reserved for Jekyll's use (names starting with `_`) are skipped

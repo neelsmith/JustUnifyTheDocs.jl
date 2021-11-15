@@ -1,4 +1,4 @@
-using JustUnifyTheDocs
+using UnifyJustTheDocs
 using Test
 
 @testset "Test reading directory of pages" begin

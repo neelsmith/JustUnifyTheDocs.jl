@@ -1,4 +1,4 @@
-module JustUnifyTheDocs
+module UnifyJustTheDocs
 
 
 using Documenter, DocStringExtensions
