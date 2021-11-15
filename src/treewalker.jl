@@ -8,7 +8,7 @@ function jtdpage(f)
     yaml = []
     index = 2
     l = ""
-    while l != "---"
+    while l != "---" && index < length(lines)
         push!(yaml, l)
         l = lines[index]
         index = index + 1
@@ -18,7 +18,7 @@ function jtdpage(f)
         parts = split(conf, ":")
         propertydict[parts[1]] = tidyvalue(join(parts[2:end], ": "))
     end
-    title = propertydict["title"]
+    title = haskey(propertydict, "title") ? propertydict["title"] : "Untitled page"
     parentval = haskey(propertydict, "parent") ? propertydict["parent"] : nothing
     gpval = haskey(propertydict, "grand_parent") ? propertydict["grand_parent"] : nothing
     navorder = haskey(propertydict, "nav_order") ? parse(Int64, propertydict["nav_order"]) : 0

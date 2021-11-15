@@ -18,7 +18,7 @@ are in the root level of the site.
 """
 function rootpages(pglist)
     pages = filter(pg -> isnothing(pg.parent), pglist)
-    sort(pages, by = pg -> pg.num)
+    sort(pages, by = pg -> pg.nav_order)
 end
 
 
@@ -28,7 +28,7 @@ $(SIGNATURES)
 """
 function childpages(pg, pglist)
     pages = filter(p -> p.parent == pg.title, pglist)
-    sort(pages, by = p -> p.num)
+    sort(pages, by = p -> p.nav_order)
 end
 
 """For a single page at the root level of the Jekyll
