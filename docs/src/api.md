@@ -34,4 +34,6 @@ Internal functions:
 UnifyJustTheDocs.rootpage
 UnifyJustTheDocs.stripquotes
 UnifyJustTheDocs.tidyvalue
+UnifyJustTheDocs.pageparts
+UnifyJustTheDocs.adjustpaths
 ```

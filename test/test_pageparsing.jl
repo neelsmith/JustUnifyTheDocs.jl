@@ -11,11 +11,3 @@
     @test md2 isa String
 end
 
-
-@testset "Test reading YAML heading" begin
-    homepage = joinpath("data", "samplesite", "index.md")  |> realpath
-    #dict = UnifyJustTheDocs.propertydict(homepage)
-    #YAML.load
- end
-
- 

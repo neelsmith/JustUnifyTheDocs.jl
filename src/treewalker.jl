@@ -1,27 +1,7 @@
-"""Read YAML settings into a Dict.
-
-$(SIGNATURES)
-"""
-function propertydict(f)
-    @info("Create page from ", f)
-    lines = readlines(f)
-    yaml = []
-    index = 2
-    l = ""
-    while l != "---" && index < length(lines)
-        push!(yaml, l)
-        l = lines[index]
-        index = index + 1
-    end
-    dict =  Dict() 
-    for conf in yaml
-        parts = split(conf, ":")
-        dict[parts[1]] = tidyvalue(join(parts[2:end], ": "))
-    end
-    dict
-end
 
 """Split markdown file into YAML header and markdown body.
+Returns a tuple of 2 strings.  If there is no YAML header, 
+the first string will be empty.
 
 $(SIGNATURES)
 """
@@ -49,14 +29,6 @@ function pageparts(f)
         end
     end
     (join(yaml, "\n"), join(markdown, "\n"))
-    #=
-    dict =  Dict() 
-    for conf in yaml
-        parts = split(conf, ":")
-        dict[parts[1]] = tidyvalue(join(parts[2:end], ": "))
-    end
-    dict
-    =#
 end
 
 """Create a `JTDPage` from a markdown file including YAML header for use with the `just-the-docs` jekyll theme.
@@ -66,31 +38,13 @@ $(SIGNATURES)
 `f` should be the explicit full page (Julia `realpath()`) to a markdown file.
 """
 function jtdpage(f)
-    #=
-    @info("Create page from ", f)
-    lines = readlines(f)
-    yaml = []
-    index = 2
-    l = ""
-    while l != "---" && index < length(lines)
-        push!(yaml, l)
-        l = lines[index]
-        index = index + 1
-    end
-    propertydict =  Dict() 
-    for conf in yaml
-        parts = split(conf, ":")
-        propertydict[parts[1]] = tidyvalue(join(parts[2:end], ": "))
-    end
-    =#
+    (yaml, rawmd) = pageparts(f)
+    propertydict = YAML.load(yaml)
     title = haskey(propertydict, "title") ? propertydict["title"] : "Untitled page"
     parentval = haskey(propertydict, "parent") ? propertydict["parent"] : nothing
     gpval = haskey(propertydict, "grand_parent") ? propertydict["grand_parent"] : nothing
-    navorder = haskey(propertydict, "nav_order") ? parse(Int64, propertydict["nav_order"]) : 0
-    rawmd = join(lines[index:end], "\n") 
-
+    navorder = haskey(propertydict, "nav_order") ? propertydict["nav_order"] : 0
     md = adjustpaths(rawmd, dirname(f))
-
     JTDPage(title, parentval, gpval, navorder, md)    
 end
 
@@ -144,11 +98,3 @@ function readpages(starthere)
 end
 
 
-"""Rewrite markdown source in `mdsrc` by converting relative paths to full paths.
-
-$(SIGNATURES)
-"""
-function adjustpaths(mdsrc, dirname)
-    #TBA
-    mdsrc
-end
