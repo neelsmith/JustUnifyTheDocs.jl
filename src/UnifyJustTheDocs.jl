@@ -8,6 +8,7 @@ using CommonMark
 include("treewalker.jl")
 include("jtdpage.jl")
 include("links.jl")
+include("utils.jl")
 
 
 export JTDPage

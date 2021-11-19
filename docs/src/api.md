@@ -1,9 +1,7 @@
 # API documentation
 
 
-## All you normally need
-
-The function to create markdown from a Jekyll source directory:
+## All you normally need to create markdown from a Jekyll source directory
 
 ```@docs
 composite
@@ -11,7 +9,7 @@ composite
 
 ## Page structures
 
-The main data structure:
+If you want to work with the parsed tree of pages, the main data structure you can use is:
 
 ```@docs
 JTDPage
@@ -28,7 +26,6 @@ childpages
 
 ## Utilities
 
-Internal functions:
 
 ```@docs
 UnifyJustTheDocs.rootpage

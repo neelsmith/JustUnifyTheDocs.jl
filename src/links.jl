@@ -8,7 +8,7 @@ function adjustpaths(mdsrc, dir)
     parsed = p(mdsrc)
     for (node, enter) in parsed
         if enter
-            if node.t isa CommonMark.Link
+            if node.t isa CommonMark.Image
                 node.t.destination = rewrite_link(node.t.destination, dir)
                 #@info("Modified destination to ", node.t.destination)
             end
