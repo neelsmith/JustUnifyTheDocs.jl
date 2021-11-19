@@ -1,55 +1,20 @@
-
 """Create a `JTDPage` from a markdown file including YAML header for use with the `just-the-docs` jekyll theme.
 
 $(SIGNATURES)
+
+`f` should be the explicit full page (Julia `realpath()`) to a markdown file.
 """
 function jtdpage(f)
-    lines = readlines(f)
-    yaml = []
-    index = 2
-    l = ""
-    while l != "---" && index < length(lines)
-        push!(yaml, l)
-        l = lines[index]
-        index = index + 1
-    end
-    propertydict =  Dict() 
-    for conf in yaml
-        parts = split(conf, ":")
-        propertydict[parts[1]] = tidyvalue(join(parts[2:end], ": "))
-    end
+    (yaml, rawmd) = pageparts(f)
+    propertydict = YAML.load(yaml)
     title = haskey(propertydict, "title") ? propertydict["title"] : "Untitled page"
     parentval = haskey(propertydict, "parent") ? propertydict["parent"] : nothing
     gpval = haskey(propertydict, "grand_parent") ? propertydict["grand_parent"] : nothing
-    navorder = haskey(propertydict, "nav_order") ? parse(Int64, propertydict["nav_order"]) : 0
-    md = join(lines[index:end], "\n")
-
+    navorder = haskey(propertydict, "nav_order") ? propertydict["nav_order"] : 0
+    md = adjustpaths(rawmd, dirname(f))
     JTDPage(title, parentval, gpval, navorder, md)    
 end
 
-"""Remove any leading and trailing quotation marks.
-
-$(SIGNATURES)
-"""
-function stripquotes(s)
-    subbed = s
-    for rs in [
-       r"^\"" => "",
-       r"\"$" => ""
-        ]
-        subbed = replace(subbed,rs)
-    end
-    subbed
-end
-
-"""Tidy up strings from YAML settings by stripping
-leading/trailing whitespace, and removing any outer quotes.
-
-$(SIGNATURES)
-"""
-function tidyvalue(propvalue)
-    strip(propvalue) |> stripquotes
-end
 
 """Recursively read directories of markdown files
 into a list of `JTDPage`s.
@@ -57,8 +22,11 @@ into a list of `JTDPage`s.
 $(SIGNATURES)
 """
 function readpages(starthere)
+    srcpath = realpath(starthere)
+    @info("Reading markdown source files from ", srcpath)
+    
     jtdpages = JTDPage[]
-    for (root, dir, files) in walkdir(starthere)
+    for (root, dir, files) in walkdir(srcpath)
         mdfiles = filter(f -> endswith(f, ".md"), files)
         for mdfile in mdfiles
             if occursin("/_", root) || occursin("/.", root)
@@ -72,3 +40,5 @@ function readpages(starthere)
     @info("Pages read: ", length(jtdpages))
     jtdpages
 end
+
+
