@@ -52,7 +52,7 @@ end
 
 
 """Compose a single markdown string with all content
-of a Jekyll web site configured for the `just-the-docs`` theme.
+of a Jekyll web site configured for the `just-the-doc` theme.
 
 $(SIGNATURES)
 """ 
