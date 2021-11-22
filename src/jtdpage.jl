@@ -52,12 +52,12 @@ end
 
 
 """Compose a single markdown string with all content
-of a Jekyll web site configured for the `just-the-docs`` theme.
+of a Jekyll web site configured for the `just-the-doc` theme.
 
 $(SIGNATURES)
 """ 
-function composite(rootdir)
-    allpages = readpages(rootdir)
+function composite(rootdir; pandoc_anchors =  false)
+    allpages = readpages(rootdir; anchors = pandoc_anchors)
     rootpgs = rootpages(allpages)
     allcontent = []
     for pg in rootpgs
