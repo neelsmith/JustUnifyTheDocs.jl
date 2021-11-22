@@ -1,7 +1,7 @@
 name = "UnifyJustTheDocs"
 uuid = "11bfd71e-bedf-46a1-8e5b-178579ef73ee"
 authors = ["Neel Smith <dnsmith.neel@gmail.com>"]
-version = "0.3.0"
+version = "0.3.1"
 
 [deps]
 CommonMark = "a80b9123-70ca-4bc0-993e-6e3bcb318db6"
