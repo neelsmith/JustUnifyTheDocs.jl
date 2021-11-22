@@ -1,6 +1,4 @@
-```@setup links
-repositoryroot = pwd() |> dirname |> dirname
-```
+
 
 # Links
 
@@ -14,10 +12,10 @@ In links and image references, URLs and absolute file paths are kept unchanged i
 
 ## Example of links passed through unchanged
 
-The `test/data/internallink` has a single file with examples of a link and image reference.
+The `test/data/internallink` directory has a single file with examples of a link and image reference.
 
 ```@example links
-externallink = joinpath(repositoryroot, "test", "data", "externallink")
+externallink = joinpath("test", "data", "externallink")
 srcfile = joinpath(externallink, "f1.md")
 read(srcfile) |> String |> print
 ```
@@ -30,15 +28,26 @@ using UnifyJustTheDocs
 composite(externallink) |> String |> print
 ```
 
-## Relative references
+## Relative references: local files
 
 
 Relative file paths, on the other hand, would be meaningless in the composite file. The `test/data/externallink` directory has two brief files, `f1.md` and `f2.md`; the second includes a link to the first with a relative file link.
 
 ```@example links
-f2 = joinpath(repositoryroot, "test", "data", "internallink", "f2.md)
+f2 = joinpath("test", "data", "internallink", "f2.md")
 read(f2) |> String |> print
 ```
+
+If you set the optional `pandoc_anchors` parameter to true, a pandoc-style named anchor will be included in the composite at the point where each file begins, and relative file links will be converted to internal references to this ink.
+
+
+```@example links
+internallink = joinpath("test", "data", "internallink")
+composite(internallink, pandoc_anchors = true) |> String |> print
+```
+
+
+## Relative references: images
 
 For *image* links (content bracketed in markdown by `![` and `]`, with image destination in parentheses), relative paths are replaced with absolute paths, since links relative the original source page would be meaningless once the hierarchical page organization of the original web site has been flattened into a single file.
 
@@ -46,13 +55,3 @@ The resulting markdown can be directly used by other markdown-aware applications
 
 
 
-
-```@example links
-#=
-internallink = joinpath(repositoryroot, "test", "data", "internallink")
-
-using UnifyJustTheDocs
-markdown = composite(samplesite)
-markdown |> String |> print
-=#
-```
