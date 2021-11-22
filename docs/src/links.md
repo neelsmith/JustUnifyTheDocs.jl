@@ -18,7 +18,7 @@ In links and image references, URLs and absolute file paths are kept unchanged i
 
 ## Example of links passed through unchanged
 
-The `assets/internallink` directory has a single file with examples of a link and image reference.
+Withing this repository's `docs/src/assets` directory, the `externallink` directory has a single file with examples of a link and image reference.
 
 ```@example links
 externallink = joinpath("assets", "externallink")
@@ -26,7 +26,7 @@ srcfile = joinpath(externallink, "f1.md")
 read(srcfile) |> String |> print
 ```
 
-The output from `composite` is unchanged.
+The links are unchanged in the output from `composite`.
 
 
 ```@example links
@@ -36,7 +36,7 @@ composite(externallink) |> String |> print
 
 ## Relative references: images
 
-For *image* links, relative paths are replaced with absolute paths, since links relative the original source page would be meaningless once the hierarchical page organization of the original web site has been flattened into a single file.
+For image links, relative paths are replaced with absolute paths, since links relative to the original source page would be meaningless once the hierarchical page organization of the original web site has been flattened into a single file.
 
 The resulting markdown can be directly used by other markdown-aware applications, such as pandoc to generate PDF or other formatted files.
 
@@ -47,11 +47,11 @@ The resulting markdown can be directly used by other markdown-aware applications
 
 ## Relative references: local files
 
-Relative file paths are also meaningless in the composite file.  The `composite` functions accepts an optional `pandoc_anchors` parameter you can use to insert a pandoc-style named anchor in the composite at the point where each file begins, and convert
-relative file links to correspnoding internal references.
+Links to content using relative links to file paths are also meaningless in the composite file.  The `composite` functions accepts an optional `pandoc_anchors` parameter you can use to insert a [pandoc-style named anchor](https://pandoc.org/MANUAL.html#heading-identifiers) in the composite at the point where each file begins, and convert
+relative file links to corresponding internal references.
 
 
-This is most easily seen with an example.  The `assets/externallink` directory has two short files, `f1.md` and `f2.md`; the second includes a link to the first with a relative file link.
+This is most easily seen with an example.  The `assets/externallink` directory has two short files, `f1.md` and `f2.md`; the second includes a link to the first using a relative file link.
 
 ```@example links
 f2 = joinpath("assets", "internallink", "f2.md")
@@ -59,7 +59,7 @@ read(f2) |> String |> print
 ```
 
 
-Notice that when we set the `pandoc_anchors` parameter to true, the composite now includes an empty header `#` with a pandoc named anchor at the points where content from `f1` and `f2` begin.  The name for the anchor point is derived from the path to the file; the relative references to `f1` in `f2` is converted to the internal reference marking the beginning of `f1`.
+When we composite these files with the `pandoc_anchors` parameter set to true, the result now includes an empty header `#` with a pandoc named anchor at the points where content from `f1` and `f2` begin.  The name for the anchor point is derived from the path to the file;  in `f2`, the relative reference to `f1` is converted to the internal reference marking the beginning of `f1`.
 
 
 ```@example links
