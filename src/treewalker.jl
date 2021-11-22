@@ -5,7 +5,6 @@ $(SIGNATURES)
 `f` should be the explicit full page (Julia `realpath()`) to a markdown file.
 """
 function jtdpage(f; refpath = "")
-
     topanchor = ""
     if ! isempty(refpath)
         anchorpath = join((splitpath(refpath)), "-")
@@ -20,7 +19,7 @@ function jtdpage(f; refpath = "")
     parentval = haskey(propertydict, "parent") ? propertydict["parent"] : nothing
     gpval = haskey(propertydict, "grand_parent") ? propertydict["grand_parent"] : nothing
     navorder = haskey(propertydict, "nav_order") ? propertydict["nav_order"] : 0
-    adjustedmd = adjustpaths(rawmd, dirname(f))
+    adjustedmd = adjustpaths(rawmd, dirname(f); relpath = refpath)
     md = join([topanchor, adjustedmd], "\n\n")
     JTDPage(title, parentval, gpval, navorder, md)    
 end
@@ -31,8 +30,9 @@ into a list of `JTDPage`s.
 
 $(SIGNATURES)
 """
-function readpages(starthere; anchors = true)
+function readpages(starthere; anchors = false)
     srcpath = realpath(starthere)
+    anchordir = anchors ? starthere : ""
     @info("Reading markdown source files from ", srcpath)
     
     jtdpages = JTDPage[]
@@ -44,7 +44,7 @@ function readpages(starthere; anchors = true)
             else
                
                 fullpath = joinpath(root, mdfile)
-                push!(jtdpages, (jtdpage(fullpath; refpath = starthere)))
+                push!(jtdpages, (jtdpage(fullpath; refpath = anchordir)))
             end
         end
     end

@@ -56,7 +56,7 @@ of a Jekyll web site configured for the `just-the-doc` theme.
 
 $(SIGNATURES)
 """ 
-function composite(rootdir; pandoc_anchors =  true)
+function composite(rootdir; pandoc_anchors =  false)
     allpages = readpages(rootdir; anchors = pandoc_anchors)
     rootpgs = rootpages(allpages)
     allcontent = []

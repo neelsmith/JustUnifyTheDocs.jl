@@ -17,7 +17,10 @@ makedocs(
     sitename="UnifyJustTheDocs.jl",
     pages = [
         "Guide" => "index.md",
+        "Resolving relative links" => "links.md",
         "How it works" => "how.md",
+
+
         "API documentation" => "api.md"
     ]
     )
