@@ -18,7 +18,7 @@ In links and image references, URLs and absolute file paths are kept unchanged i
 
 ## Example of links passed through unchanged
 
-The `test/data/internallink` directory has a single file with examples of a link and image reference.
+The `assets/internallink` directory has a single file with examples of a link and image reference.
 
 ```@example links
 externallink = joinpath("assets", "externallink")
