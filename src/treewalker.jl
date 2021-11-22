@@ -33,7 +33,7 @@ $(SIGNATURES)
 function readpages(starthere; anchors = false)
     srcpath = realpath(starthere)
     anchordir = anchors ? starthere : ""
-    @info("Reading markdown source files from ", srcpath)
+    @info("Reading markdown source files from ", starthere)
     
     jtdpages = JTDPage[]
     for (root, dir, files) in walkdir(srcpath)
