@@ -1,7 +1,7 @@
 name = "UnifyJustTheDocs"
 uuid = "11bfd71e-bedf-46a1-8e5b-178579ef73ee"
 authors = ["Neel Smith <dnsmith.neel@gmail.com>"]
-version = "0.3.1"
+version = "0.3.2"
 
 [deps]
 CommonMark = "a80b9123-70ca-4bc0-993e-6e3bcb318db6"
@@ -12,7 +12,7 @@ YAML = "ddb6d928-2868-570f-bddf-ab3f9cf99eb6"
 
 [compat]
 CommonMark = "0.8"
-DocStringExtensions = "0.8"
+DocStringExtensions = "0.9"
 Documenter = "0.27"
 YAML = "0.4"
 julia = "1"
