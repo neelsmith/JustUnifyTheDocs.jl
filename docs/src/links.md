@@ -18,7 +18,7 @@ In links and image references, URLs and absolute file paths are kept unchanged i
 
 ## Example of links passed through unchanged
 
-Withing this repository's `docs/src/assets` directory, the `externallink` directory has a single file with examples of a link and image reference.
+Within this repository's `docs/src/assets` directory, the `externallink` directory has a single file with examples of a link and image reference.
 
 ```@example links
 externallink = joinpath("assets", "externallink")
